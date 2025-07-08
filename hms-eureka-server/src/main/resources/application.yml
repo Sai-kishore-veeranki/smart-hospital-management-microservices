@@ -1,0 +1,38 @@
+server:
+  port: 8080 # Standard default port for API Gateways
+
+spring:
+  application:
+    name: hms-api-gateway # Name for Eureka registration
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true       # Enables auto-routing based on service IDs in Eureka
+          lowerCaseServiceId: true # Converts service IDs to lowercase for path matching
+      routes:
+        # Example Route 1: To the Patient Service (will be created in Phase 2)
+        # Requests to http://localhost:8080/api/patients/** will be routed to HMS-PATIENT-SERVICE
+        - id: patient-service-route
+          uri: lb://HMS-PATIENT-SERVICE # 'lb://' means load-balanced lookup in Eureka
+          predicates:
+            - Path=/api/patients/**
+
+        # Example Route 2: To the Prediction Orchestrator Service (will be created in Phase 2)
+        # Requests to http://localhost:8080/api/predictions/** will be routed to HMS-PREDICTION-ORCHESTRATOR-SERVICE
+        - id: prediction-orchestrator-route
+          uri: lb://HMS-PREDICTION-ORCHESTRATOR-SERVICE
+          predicates:
+            - Path=/api/predictions/**
+
+        # Example Route 3: Direct to Flask ML API (if Flask is accessed directly by client)
+        # This route is less common if Spring Boot Orchestrator always calls Flask, but good for testing/flexibility.
+        # Requests to http://localhost:8080/api/ml/** will be routed directly to the Flask app.
+        - id: ml-flask-direct-route
+          uri: http://localhost:5000 # Direct URL to your Flask app (make sure Flask runs on this port)
+          predicates:
+            - Path=/api/ml/**
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Point to your running Eureka Server

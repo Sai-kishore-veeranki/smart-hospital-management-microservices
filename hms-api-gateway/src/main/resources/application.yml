@@ -1,0 +1,9 @@
+server:
+  port: 8761 # Standard default port for Eureka Server
+
+eureka:
+  client:
+    register-with-eureka: false # Important: Prevents the Eureka server from registering itself as a client
+    fetch-registry: false       # Important: Prevents the Eureka server from fetching its own registry
+  instance:
+    hostname: localhost         # Set hostname for clarity, especially in local setup
