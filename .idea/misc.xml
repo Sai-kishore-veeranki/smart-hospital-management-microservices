@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/hms-api-gateway/pom.xml" />
         <option value="$PROJECT_DIR$/hms-eureka-server/pom.xml" />
+        <option value="$PROJECT_DIR$/hms-patient-service/pom.xml" />
+        <option value="$PROJECT_DIR$/hms-prediction-orchestrator-service/pom.xml" />
       </list>
     </option>
   </component>

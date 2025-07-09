@@ -1,0 +1,24 @@
+server:
+  port: 8081 # Unique port for Patient Service
+
+spring:
+  application:
+    name: hms-patient-service # Service ID for Eureka
+  datasource:
+    url: jdbc:h2:mem:patientdb # In-memory H2 database
+    driverClassName: org.h2.Driver
+    username: sa
+    password: '' # Empty password for H2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update # Automatically creates/updates table schema
+    show-sql: true # Log SQL queries
+  h2:
+    console:
+      enabled: true # Enable H2 console for viewing DB
+      path: /h2-console # Access at http://localhost:8081/h2-console
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Point to your Eureka Server

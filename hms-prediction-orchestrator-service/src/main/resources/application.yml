@@ -1,0 +1,10 @@
+server:
+  port: 8082 # Unique port for Prediction Orchestrator Service
+
+spring:
+  application:
+    name: hms-prediction-orchestrator-service # Service ID for Eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # Point to your Eureka Server
